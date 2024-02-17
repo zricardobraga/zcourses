@@ -1,11 +1,11 @@
 package com.zcourses.zcourses.modules.course;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NonNull;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
@@ -13,16 +13,20 @@ import java.util.UUID;
 
 @Data
 @Entity(name= "course")
+
 public class CourseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    
+
+    @NotNull
     private String name;
 
+    @NotNull
     private String category;
 
+    @Enumerated(EnumType.STRING)
     private StatusEnum status;
 
     @CreationTimestamp
@@ -30,5 +34,4 @@ public class CourseEntity {
 
     @UpdateTimestamp
     private LocalDateTime updated_at;
-
 }
