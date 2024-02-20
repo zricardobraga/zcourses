@@ -46,7 +46,12 @@ public class CourseController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Object> update(@PathVariable UUID id, @RequestBody Map<String, Object> data){
+    public ResponseEntity<Object> update(@PathVariable UUID id, @Valid @RequestBody Map<String, Object> data){
+
+        if (data.get("name").toString().isEmpty() || data.get("category").toString().isEmpty()) {
+            return ResponseEntity.badRequest().body("Name or Category are empty");
+        }
+
         CourseEntity updatedCourse = this.courseUseCase.update(id, data);
 
         return ResponseEntity.accepted().body(updatedCourse);
@@ -57,5 +62,15 @@ public class CourseController {
         var result = this.courseUseCase.delete(id);
 
         return ResponseEntity.ok().body(result);
+    }
+
+    @PatchMapping("/update-status/{id}")
+    public ResponseEntity<Object> updateStatus(@PathVariable UUID id, @RequestBody Map<String, Object> data){
+        try {
+            CourseEntity updatedCourse = this.courseUseCase.updateStatus(id, data);
+            return ResponseEntity.accepted().body(updatedCourse);
+        } catch (Exception e) {
+            return ResponseEntity.ofNullable("Course not updated");
+        }
     }
 }

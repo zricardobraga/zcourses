@@ -4,6 +4,7 @@ import com.zcourses.zcourses.exceptions.CourseFoundException;
 import com.zcourses.zcourses.exceptions.CourseNotFoundException;
 import com.zcourses.zcourses.modules.course.CourseEntity;
 import com.zcourses.zcourses.modules.course.CourseRepository;
+import com.zcourses.zcourses.modules.course.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,4 +58,17 @@ public class CourseUseCase {
         return "Deleted course";
     }
 
+    public CourseEntity updateStatus(UUID id, Map<String, Object> data){
+        CourseEntity course = this.courseRepository.findById(id).orElseThrow();
+        //se no map recebido existir a chave status
+        if (data.containsKey("status")) {
+            //pega o status do map e faz converte (cast) para uma string
+            var statusReceived = (String) data.get("status");
+            //converte o status em enum
+            StatusEnum statusEnum = StatusEnum.valueOf(statusReceived.toUpperCase());
+            //altera o status
+            course.setStatus(statusEnum);
+        }
+        return this.courseRepository.save(course);
+    }
 }
