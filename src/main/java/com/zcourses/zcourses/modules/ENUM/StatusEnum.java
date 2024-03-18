@@ -1,4 +1,4 @@
-package com.zcourses.zcourses.modules.course.ENUM;
+package com.zcourses.zcourses.modules.ENUM;
 
 public enum StatusEnum {
     ACTIVE, INACTIVE;

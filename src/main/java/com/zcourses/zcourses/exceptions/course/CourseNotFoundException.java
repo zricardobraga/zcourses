@@ -1,4 +1,4 @@
-package com.zcourses.zcourses.exceptions;
+package com.zcourses.zcourses.exceptions.course;
 
 public class CourseNotFoundException extends RuntimeException{
     public CourseNotFoundException(){

@@ -1,7 +1,7 @@
 package com.zcourses.zcourses.modules.course.controller;
 
-import com.zcourses.zcourses.modules.course.CourseEntity;
-import com.zcourses.zcourses.modules.course.StatusEnum;
+import com.zcourses.zcourses.modules.course.entity.CourseEntity;
+import com.zcourses.zcourses.modules.ENUM.StatusEnum;
 import com.zcourses.zcourses.modules.course.useCases.CourseUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.hibernate.annotations.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

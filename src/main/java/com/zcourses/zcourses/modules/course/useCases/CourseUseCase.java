@@ -1,10 +1,10 @@
 package com.zcourses.zcourses.modules.course.useCases;
 
-import com.zcourses.zcourses.exceptions.CourseFoundException;
-import com.zcourses.zcourses.exceptions.CourseNotFoundException;
-import com.zcourses.zcourses.modules.course.CourseEntity;
-import com.zcourses.zcourses.modules.course.CourseRepository;
-import com.zcourses.zcourses.modules.course.StatusEnum;
+import com.zcourses.zcourses.exceptions.course.CourseFoundException;
+import com.zcourses.zcourses.exceptions.course.CourseNotFoundException;
+import com.zcourses.zcourses.modules.course.entity.CourseEntity;
+import com.zcourses.zcourses.modules.course.repository.CourseRepository;
+import com.zcourses.zcourses.modules.ENUM.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
