@@ -1,10 +1,9 @@
-package com.zcourses.zcourses.modules.course;
+package com.zcourses.zcourses.modules.course.repository;
 
+import com.zcourses.zcourses.modules.course.entity.CourseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
