@@ -1,7 +1,9 @@
 package com.zcourses.zcourses.modules.student.controller;
 
 import com.zcourses.zcourses.modules.ENUM.StatusEnum;
+import com.zcourses.zcourses.modules.student.dto.EnrollCourseDTO;
 import com.zcourses.zcourses.modules.student.entity.StudentEntity;
+import com.zcourses.zcourses.modules.student.useCases.EnrollCourseStudentUseCase;
 import com.zcourses.zcourses.modules.student.useCases.StudentUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -10,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/students")
@@ -25,6 +29,9 @@ public class StudentController {
 
     @Autowired
     private StudentUseCase studentUseCase;
+
+    @Autowired
+    private EnrollCourseStudentUseCase enrollCourseStudentUseCase;
 
     @PostMapping("/create")
     @Operation(summary = " Cadastro", description = "Essa rota é responsável por cadastrar um estudante no sistema")
@@ -64,4 +71,16 @@ public class StudentController {
         }
         return ResponseEntity.ok().body(students);
     }
+
+    @PostMapping("/course/enroll")
+    @Operation(summary = "Inscrição do estudante para um curso", description = "Essa rota é responsável por possibilitar a matriocula de um estudante em um curso")
+    public ResponseEntity<Object> enrollCourse(@RequestBody EnrollCourseDTO enrollCourseDTO){
+        try {
+            var result = this.enrollCourseStudentUseCase.enroll(enrollCourseDTO.getIdStudent(), enrollCourseDTO.getIdCourse());
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }
